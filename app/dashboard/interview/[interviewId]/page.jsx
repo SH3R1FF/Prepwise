@@ -30,15 +30,15 @@ function Interview({ params }) {
 
   return (
     <div className="my-10 flex justify-center flex-col items-center">
-      <h2 className="font-bold text-2xl">Let's Get Started</h2>
+      <h2 className="font-bold text-2xl text-neutral-300">Let's Get Started</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
-        <div className="flex flex-col my-8 gap-5 ">
-            <div className="flex flex-col p-5 rounded-lg border gap-5 bg-secondary">
-                <h2><strong>Job Role/Job Position: </strong>{interviewData?.jobPosition}</h2>
-                <h2><strong>Job Description: </strong>{interviewData?.jobDesc}</h2>
-                <h2><strong>Job Experience: </strong>{interviewData?.jobExperience} years+ </h2>
+        <div className="flex flex-col my-8 gap-5  ">
+            <div className="flex flex-col p-5 rounded-lg border gap-5 bg-neutral-900 text-neutral-200">
+                <h2><strong className="text-green-500">Job Role/Job Position: </strong>{interviewData?.jobPosition}</h2>
+                <h2><strong className="text-green-500">Job Description: </strong>{interviewData?.jobDesc}</h2>
+                <h2><strong className="text-green-500">Job Experience: </strong>{interviewData?.jobExperience} years+ </h2>
             </div>
 
             <div className="p-5 border rounded-lg border-yellow-200 bg-yellow-100">
@@ -67,7 +67,7 @@ function Interview({ params }) {
             
             ) : (
             <>
-                <WebcamIcon className="w-full h-[316px] p-20 bg-secondary rounded-lg border my-8 text-neutral-700"/>
+                <WebcamIcon className="w-full h-[316px] p-20 bg-neutral-900 rounded-lg border my-8 text-neutral-700"/>
                 <Button onClick={() => setWebCamEnabled(true)}>
                   Enable Webcam and Microphone
                 </Button>

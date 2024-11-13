@@ -15,10 +15,9 @@ import { Label } from '@/components/ui/label'
 import {Input } from "@/components/ui/input"
 import { Textarea } from '@/components/ui/textarea'
 import { chatSession } from '@/utils/GeminiAIModal'
-import { LoaderIcon } from 'lucide-react'
+import { FilePlus2, LoaderIcon } from 'lucide-react'
 import { db } from '@/utils/drizzle/db'
 import { v4 as uuidv4 } from 'uuid'
-import { json } from 'drizzle-orm/mysql-core'
 import moment from 'moment'
 import { useUser } from '@clerk/nextjs'
 import { Prepwise } from '@/utils/drizzle/schema'
@@ -98,13 +97,13 @@ function AddNewInterview() {
 
   return (
     <div>
-        <div className='p-10 border rounded-lg bg-secondary hover:scale-105 hover:shadow-md cursor-pointer transition-all duration-400' onClick={() => setOpenDialog(true)}>
-            <h2 className='text-lg text-center'>+ Add New</h2>
+        <div className='p-10 border rounded-lg bg-neutral-900 text-neutral-200 hover:scale-105 hover:shadow-md cursor-pointer transition-all duration-400 flex items-center gap-2 justify-center' onClick={() => setOpenDialog(true)}>
+            <Button className='text-lg text-center '> <FilePlus2 /> Add New</Button>
         </div>
         <Dialog open={openDialog}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl bg-neutral-950">
             <DialogHeader>
-            <DialogTitle>Tell us more about your job interviewing</DialogTitle>
+            <DialogTitle className="text-neutral-300">Tell us more about your job interviewing</DialogTitle>
             <DialogDescription>
     
                     Add Details about your job position/role, Job description and years of experience
@@ -113,18 +112,21 @@ function AddNewInterview() {
             </DialogHeader>
             <form onSubmit={onSubmit}>
                 <div className='my-2'>
-                    <Label>Job Role / Job Position</Label>
-                    <Input placeholder="Ex. Full Stack Developer" required
-                        onChange={(e) => setJobPosition(e.target.value)}
-                        />
+                    <Label className="text-neutral-400" >Job Role / Job Position</Label>
+                    <Input 
+                      placeholder="Ex. Full Stack Developer" 
+                      required
+                      onChange={(e) => setJobPosition(e.target.value)}
+                      className="bg-neutral-900 outline-none border-neutral-800 text-neutral-200 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      />
                 </div>
                 <div className='my-2'>
-                    <Label>Job Description / Tech Stack</Label>
-                    <Textarea placeholder="Ex. React, Node, MongoDB, Express etc" required onChange={(e) => setJobDesc(e.target.value)}/>
+                    <Label className="text-neutral-400">Job Description / Tech Stack</Label>
+                    <Textarea placeholder="Ex. React, Node, MongoDB, Express etc" required onChange={(e) => setJobDesc(e.target.value)} className="bg-neutral-900 outline-none border-neutral-800 text-neutral-200 focus-visible:ring-0 focus-visible:ring-offset-0"/>
                 </div>
                 <div className='my-2'>
-                    <Label>Years of experience</Label>
-                    <Input placeholder="Ex. 5" type="number" max="80" required onChange={(e) => setJobExperience(e.target.value)}/>
+                    <Label className="text-neutral-400">Years of experience</Label>
+                    <Input placeholder="Ex. 5" type="number" max="80" required onChange={(e) => setJobExperience(e.target.value)} className="bg-neutral-900 outline-none border-neutral-800 text-neutral-200 focus-visible:ring-0 focus-visible:ring-offset-0"/>
                 </div>
                 <DialogFooter>
                     <Button type="button" onClick={() => setOpenDialog(false)} variant="outline">Cancel</Button>
