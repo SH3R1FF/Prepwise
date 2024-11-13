@@ -12,7 +12,7 @@ function Header() {
   const path = usePathname()
 
   return (
-    <div className='flex py-2 px-8 items-center justify-between bg-neutral-900 shadow-sm border-b-2  '>
+    <div className='flex py-2 lg:px-8 px-4 items-center justify-between bg-neutral-900 shadow-sm border-b-2  '>
 
         <div className='flex gap-2 items-center bg-green-500  rounded-l-3xl rounded-r-lg  py-1 px-2 cursor-pointer'>
           <Image src={logo} alt="logo" className='h-7 w-7 '/>

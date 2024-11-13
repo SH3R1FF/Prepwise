@@ -129,16 +129,18 @@ function AddNewInterview() {
                     <Input placeholder="Ex. 5" type="number" max="80" required onChange={(e) => setJobExperience(e.target.value)} className="bg-neutral-900 outline-none border-neutral-800 text-neutral-200 focus-visible:ring-0 focus-visible:ring-offset-0"/>
                 </div>
                 <DialogFooter>
-                    <Button type="button" onClick={() => setOpenDialog(false)} variant="outline">Cancel</Button>
-                    <Button type="submit" disabled={loading}>
-                        {loading?
-                            <div className='flex gap-2 items-center'>
-                                <LoaderIcon className='animate-spin'/> Generating Questions
-                            </div>
-                            :
-                            "Start Interview"
-                        }      
-                    </Button>
+                    <div className='flex justify-end gap-2 mt-2'>
+                      <Button type="button" onClick={() => setOpenDialog(false)} variant="outline" >Cancel</Button>
+                      <Button type="submit" disabled={loading} className="">
+                          {loading?
+                              <div className='flex gap-2 items-center'>
+                                  <LoaderIcon className='animate-spin'/> Generating Questions
+                              </div>
+                              :
+                              "Start Interview"
+                            }      
+                      </Button>
+                    </div>
                 </DialogFooter>
             </form>
         </DialogContent>

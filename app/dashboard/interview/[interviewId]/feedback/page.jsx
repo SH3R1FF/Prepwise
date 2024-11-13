@@ -55,7 +55,7 @@ function Feedback({ params }) {
   };
 
   return (
-    <div className='p-10'>
+    <div className='lg:p-10 p-5'>
       {feedbackList.length === 0 ? (
         <h2 className='text-xl font-bold text-neutral-600'>No Feedback Available</h2>
       ) : (

@@ -9,7 +9,7 @@ function Dashboard
 () {
   return (
     <>
-    <div className='p-10'>
+    <div className='lg:p-10 p-5'>
       <h2 className='font-bold text-2xl text-neutral-200'>Dashboard</h2>
       <h2 className='text-neutral-500'>Create and Start your AI Mockup Interview</h2>
 

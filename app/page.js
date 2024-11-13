@@ -34,17 +34,17 @@ export default function Home() {
 
       {/* Hero Section */}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 text-white p-10 lg:mt-28 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 text-white lg:p-10 p-8 lg:mt-28 ">
         <div className="flex flex-col items-center gap-2  w-full">
-          <h1 className="text-7xl font-bold">Prepwise</h1>
-          <span className="text-base text-neutral-500 lg:p-8 p-4 lg:mx-12 text-justify">The AI Mock Interview app helps you prepare for job interviews by simulating real scenarios, providing personalized feedback and model answers. Practice answering questions, review your performance, and build confidence for your next interview.</span>
-          <div className="flex gap-4 font-bold">
+          <h1 className="lg:text-7xl text-6xl font-bold">Prepwise</h1>
+          <span className="text-base text-neutral-500 lg:p-8 p-2 lg:mx-12 text-justify">The AI Mock Interview app helps you prepare for job interviews by simulating real scenarios, providing personalized feedback and model answers. Practice answering questions, review your performance, and build confidence for your next interview.</span>
+          <div className="flex lg:gap-4 gap-2 font-bold">
             <Link href={"/sign-up"}>
-              <Button className="bg-primary font-semibold rounded-full" > <Handshake /> Join Now <ChevronRight/> </Button>
+              <Button className="bg-primary font-semibold rounded-full text-xs " > <Handshake /> Join Now <ChevronRight/> </Button>
             </Link>
 
             <Link href="/dashboard">
-              <Button className="bg-transparent hover:bg-green-600 font-semibold rounded-full" ><LayoutDashboard/> Go to Dashboard <ChevronRight/></Button>
+              <Button className="bg-transparent hover:bg-green-600 font-semibold rounded-full text-xs " ><LayoutDashboard/> Go to Dashboard <ChevronRight/></Button>
             </Link>
           </div>
           
