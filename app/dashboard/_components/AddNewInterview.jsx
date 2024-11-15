@@ -40,59 +40,52 @@ function AddNewInterview() {
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    console.log(jobPosition, jobDesc, jobExperience);
   
-    const InputPrompt = "Job Position: " + jobPosition + ", Job Description: " + jobDesc + ", Years of Experience: " + jobExperience + ". Depends on this information please give me 5 interview questions with answers in json format, give question and answers as field in JSON. Give the output in this format: ```json {\"question\": \"question\", \"answer\": \"answer\"}```. Do not give any other text in the response. Do not write anything extra.";
+    const InputPrompt = `Job Position: ${jobPosition}, Job Description: ${jobDesc}, Years of Experience: ${jobExperience}. Based on this information, please provide 5 interview questions with answers in JSON format as [{"question": "question", "answer": "answer"}]. Only provide JSON output without additional text.`;
   
-    const result = await chatSession.sendMessage(InputPrompt);
-    let MockJsonResp = result.response.text();
-  
-    // Print the raw response for debugging purposes
-    console.log("Raw Response:", MockJsonResp);
-  
-    // Remove backticks and any other non-JSON characters that may be in the response
-    MockJsonResp = MockJsonResp.replace('```json', '').replace('```', '').trim();
-  
-    // Ensure no extraneous characters after JSON data
-    MockJsonResp = MockJsonResp.replace(/\s*[^}]*$/, '');  // Removing everything after the last closing brace
-  
-    // Wrap the multiple objects in an array to make it valid JSON
-    MockJsonResp = `[${MockJsonResp.replace(/\n/g, ',')}]`;  // Replace newlines with commas between objects
-  
-    // Print the sanitized response for debugging
-    console.log("Sanitized Response:", MockJsonResp);
-  
-    // Now try parsing the sanitized response
     try {
+      const result = await chatSession.sendMessage(InputPrompt);
+      let MockJsonResp = await result.response.text();
+  
+      // Remove backticks, ensure no extraneous characters
+      MockJsonResp = MockJsonResp.replace(/```json|```/g, '').trim();
+  
+      // Wrap JSON objects in an array if needed
+      if (!MockJsonResp.startsWith('[')) {
+        MockJsonResp = `[${MockJsonResp}]`;
+      }
+  
+      // Ensure valid JSON by handling commas between objects
+      MockJsonResp = MockJsonResp.replace(/}\s*{/g, '},{');
+  
+      // Parse and handle the response
       const parsedResponse = JSON.parse(MockJsonResp);
-      console.log("Parsed JSON:", parsedResponse);
       setJsonResponse(parsedResponse);
   
-      // Insert into the database
+      // Insert parsed data into the database
       const resp = await db.insert(Prepwise)
         .values({
           mockId: uuidv4(),
-          jsonMockResp: MockJsonResp,
-          jobPosition: jobPosition,
-          jobDesc: jobDesc,
-          jobExperience: jobExperience,
+          jsonMockResp: JSON.stringify(parsedResponse),
+          jobPosition,
+          jobDesc,
+          jobExperience,
           createdBy: user?.primaryEmailAddress.emailAddress,
           createdAt: moment().format('DD-MM-yyyy'),
         })
         .returning({ mockId: Prepwise.mockId });
   
-      console.log("Inserted ID:", resp);
       if (resp) {
         setOpenDialog(false);
         router.push(`/dashboard/interview/${resp[0].mockId}`);
       }
-
     } catch (error) {
       console.error("Error parsing JSON:", error);
+    } finally {
+      setLoading(false);
     }
-  
-    setLoading(false);
   };
+  
   
 
   return (
